@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Text Analyzer</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <h1>Home</h1>
+    <a th:href="@{/showHistory}" class="btn btn-primary btn-sm mb-3"> Input History</a>
+    <br>
+
+    <h2>Enter text or add file</h2>
+
+    <br>
+
+
+    <div class="row">
+    <!--Normal Input-->
+
+        <div class="col">
+    <form action="#" th:action="@{/saveInputManual}" th:object="${userCase}" method="post">
+
+        <div class="input-group-prepend">
+            <span class="input-group-text">Enter Text</span>
+            <textarea class="form-control" th:field="*{startingInput}"
+                      aria-label="With textarea"></textarea>
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-info"> Analyze</button>
+
+
+    </form>
+    </div>
+
+    <!--File Input-->
+        <div class="col">
+    <form th:action="@{/saveFromFile}" th:object="${uploadForm}" method="POST"
+          action="" enctype="multipart/form-data">
+        Choose file to upload: <br>
+        <input th:field="*{fileDatas}" type="file"/>
+        <input type="submit" value="Upload">
+
+    </form>
+    </div>
+    </div>
+<!--Preview Table-->
+<br>
+        <h3>Case Result</h3>
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Letter</th>
+            <th>Amount</th>
+            <th>Phrase</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="case : ${activeCase}">
+            <td th:text="${case.letter}"></td>
+            <td th:text="${case.amount}"></td>
+            <td th:text="${case.phrases}"></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+</html>

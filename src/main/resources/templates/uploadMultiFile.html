@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Multi File</title>
+</head>
+
+<body>
+
+<th:block th:include="/_menu"></th:block>
+<h3>Upload Multiple File:</h3>
+
+<!--Upload Form-->
+
+<form th:object="${uploadForm}" method="post"
+action="" enctype="multipart/form-data">
+    Description:
+    <br>
+    <input th:field="*{internalString}" style="width:300px;"/>
+    <br/><br/>
+    File to Upload (1): <input th:field="*{fileDatas}" type="file"/><br/>
+    File to Upload (2): <input th:field="*{fileDatas}" type="file"/><br/>
+    File to Upload (3): <input th:field="*{fileDatas}" type="file"/><br/>
+    File to Upload (4): <input th:field="*{fileDatas}" type="file"/><br/>
+    File to Upload (5): <input th:field="*{fileDatas}" type="file"/><br/>
+
+    <input type="submit" value="Upload">
+
+</form>
+
+</body>
+</html>
