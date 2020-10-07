@@ -11,6 +11,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 @Service
 public class MatchingStringService {
     private File filename = generateUniqueFile();
@@ -79,9 +80,9 @@ public class MatchingStringService {
     //Writing to File
     public void writeToFile(List<MatchingString> sortedList, String startingString) {
 
+        // FileWriter myWriter = null;
 
-        try {
-            FileWriter myWriter = new FileWriter(filename, true);
+        try (FileWriter myWriter = new FileWriter(filename, true)) {
 
 
             for (MatchingString a : sortedList) {
@@ -91,11 +92,12 @@ public class MatchingStringService {
             myWriter.write("#\n" + startingString);
             myWriter.write("\n##");
             myWriter.write("\n");
-            myWriter.close();
 
 
         } catch (IOException e) {
+
             e.printStackTrace();
+
         }
 
 
@@ -124,7 +126,8 @@ public class MatchingStringService {
     public String[] splitString(String input) {
 
 
-        String[] splitString = input.split(" ");
+        String[] splitString = input.split("[\\s]+");
+        //[a-z]{2, 5}
 
         return splitString;
     }

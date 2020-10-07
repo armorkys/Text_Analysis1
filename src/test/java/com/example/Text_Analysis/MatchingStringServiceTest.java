@@ -22,6 +22,72 @@ public class MatchingStringServiceTest {
 
     MatchingStringService service = new MatchingStringService();
 
+
+    @Test
+    public void testManySpaces_FewWords(){
+
+        String test = "     ABBA  A3#";
+
+
+        List<MatchingString> ans = service.processUserInput(test);
+
+
+        List<MatchingString> ansTrue  = new ArrayList<MatchingString>();
+
+        ansTrue.add(new MatchingString('a', 1, "ABBA"));
+
+
+        Assertions.assertEquals(ansTrue, ans);
+
+
+    }
+
+    @Test
+    public void testBiggerSpaces_AndWords(){
+
+        String input = "      \n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "  \n" +
+                "abba\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "al$\n" +
+                "\n" +
+                "\n" +
+                "alo";
+
+
+        List<MatchingString> ans = service.processUserInput(input);
+
+        List<MatchingString> ansTrue  = new ArrayList<MatchingString>();
+
+        ansTrue.add(new MatchingString('a', 1, "abba"));
+        ansTrue.add(new MatchingString('o', 1, "alo"));
+
+        Assertions.assertEquals(ansTrue, ans);
+
+
+
+    }
+
+
+    @Test
+    public void testDuplicatesListMatch(){
+        List<MatchingString> ansTrue  = new ArrayList<MatchingString>();
+
+   MatchingString test1 =new MatchingString('a', 1, "ABBA");
+   MatchingString test2 =new MatchingString('a', 1, "ABBA");
+
+
+   Assertions.assertTrue(test1.equals(test2));
+
+//Assertions.assertEquals(test1, test2);
+
+    }
+
     @Test
     public void testSplitStringNoSpaces() {
         String noSpace = "ASDCAWAWDCA";

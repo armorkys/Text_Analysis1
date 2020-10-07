@@ -1,5 +1,7 @@
 package com.example.Text_Analysis.model;
 
+import java.util.Objects;
+
 public class MatchingString {
 
     private char letter;
@@ -38,5 +40,20 @@ public class MatchingString {
 
     public String toString() {
         return this.letter + " " + this.amount + " " + phrases;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchingString that = (MatchingString) o;
+        return letter == that.letter &&
+                amount == that.amount &&
+                Objects.equals(phrases, that.phrases);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(letter, amount, phrases);
     }
 }
